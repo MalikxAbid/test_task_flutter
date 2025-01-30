@@ -46,4 +46,10 @@ class ProductByCatagoryController extends GetxController {
       );
     }
   }
+
+  @override
+  void onClose() {
+    searchcontroller.clear(); // Clear search text when controller is closed
+    super.onClose();
+  }
 }

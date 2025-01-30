@@ -44,7 +44,7 @@ class ProductListScreen extends StatelessWidget {
             ),
             Obx(
               () => CText(
-                text: '${controller.filteredProducts.length} results found',
+                text: controller.filteredProducts.isNotEmpty ? '${controller.filteredProducts.length} results found' : "",
                 fontsize: 14,
                 color: AppColor.grey,
               ),

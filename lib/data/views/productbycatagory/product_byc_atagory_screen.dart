@@ -18,7 +18,6 @@ class ProductBycAtagoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProductByCatagoryController controller = Get.put(ProductByCatagoryController(url: url));
-    controller.searchcontroller.clear();
 
     return Scaffold(
       appBar: CAppBar(
@@ -48,7 +47,7 @@ class ProductBycAtagoryScreen extends StatelessWidget {
             ),
             Obx(
               () => CText(
-                text: '${controller.filteredProducts.length} results found',
+                text: controller.filteredProducts.isNotEmpty ? '${controller.filteredProducts.length} results found' : "",
                 fontsize: 14,
                 color: AppColor.grey,
               ),

@@ -42,7 +42,7 @@ class CategoryListScreen extends StatelessWidget {
             ),
             Obx(
               () => CText(
-                text: '${controller.filteredCategories.length} results found',
+                text: controller.filteredCategories.isNotEmpty ? '${controller.filteredCategories.length} results found' : "",
                 fontsize: 14,
                 color: AppColor.grey,
               ),
