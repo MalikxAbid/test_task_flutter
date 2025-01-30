@@ -16,10 +16,10 @@ class FavouritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FavoriteController favoriteController = Get.find<FavoriteController>();
-    TextEditingController favtext = TextEditingController();
+    TextEditingController favtextcontroller = TextEditingController();
 
-    favtext.addListener(() {
-      favoriteController.filterFavorites(favtext.text);
+    favtextcontroller.addListener(() {
+      favoriteController.filterFavorites(favtextcontroller.text);
     });
 
     return Scaffold(
@@ -28,55 +28,60 @@ class FavouritesScreen extends StatelessWidget {
         titleColor: AppColor.black,
       ),
       backgroundColor: AppColor.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: getResponsiveHeight(context, 40),
-              child: CTextField(
-                focusBorderColor: AppColor.black,
-                prefexIcon: const Icon(Icons.search),
-                hint: 'Search',
-                borderColor: AppColor.black,
-                borderRadius: 8,
-                filled: false,
-                controller: favtext,
-              ),
-            ),
-            SizedBox(
-              height: getResponsiveHeight(context, 16),
-            ),
-            Obx(
-              () => CText(
-                text: favoriteController.filteredFavorites.isNotEmpty ? '${favoriteController.filteredFavorites.length} results found' : "",
-                fontsize: 14,
-                color: AppColor.grey,
-              ),
-            ),
-            SizedBox(
-              height: getResponsiveHeight(context, 16),
-            ),
-            Expanded(
-              child: Obx(() {
-                if (favoriteController.filteredFavorites.isEmpty) {
-                  return const Center(child: CText(text: "No favorite products"));
-                }
-
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: favoriteController.filteredFavorites.length,
-                    itemBuilder: (context, index) {
-                      Product product = favoriteController.filteredFavorites[index];
-                      return _buildFavouriteItem(product, favoriteController);
-                    },
+      body: GetBuilder<FavoriteController>(
+        builder: (favoriteController) {
+          favtextcontroller.clear();
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: getResponsiveHeight(context, 40),
+                  child: CTextField(
+                    focusBorderColor: AppColor.black,
+                    prefexIcon: const Icon(Icons.search),
+                    hint: 'Search',
+                    borderColor: AppColor.black,
+                    borderRadius: 8,
+                    filled: false,
+                    controller: favtextcontroller,
                   ),
-                );
-              }),
+                ),
+                SizedBox(
+                  height: getResponsiveHeight(context, 16),
+                ),
+                Obx(
+                  () => CText(
+                    text: favoriteController.filteredFavorites.isNotEmpty ? '${favoriteController.filteredFavorites.length} results found' : "",
+                    fontsize: 14,
+                    color: AppColor.grey,
+                  ),
+                ),
+                SizedBox(
+                  height: getResponsiveHeight(context, 16),
+                ),
+                Expanded(
+                  child: Obx(() {
+                    if (favoriteController.filteredFavorites.isEmpty) {
+                      return const Center(child: CText(text: "No favorite products"));
+                    }
+
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: favoriteController.filteredFavorites.length,
+                        itemBuilder: (context, index) {
+                          Product product = favoriteController.filteredFavorites[index];
+                          return _buildFavouriteItem(product, favoriteController);
+                        },
+                      ),
+                    );
+                  }),
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

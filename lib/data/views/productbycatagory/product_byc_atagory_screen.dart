@@ -18,6 +18,7 @@ class ProductBycAtagoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProductByCatagoryController controller = Get.put(ProductByCatagoryController(url: url));
+    controller.searchcontroller.clear();
 
     return Scaffold(
       appBar: CAppBar(

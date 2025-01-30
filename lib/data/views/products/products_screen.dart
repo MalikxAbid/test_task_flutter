@@ -15,6 +15,7 @@ class ProductListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProductController controller = Get.put(ProductController());
+    controller.productsearchcontroller.clear();
     return Scaffold(
       appBar: const CAppBar(
         title: 'Products',

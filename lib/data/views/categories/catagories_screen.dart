@@ -13,6 +13,7 @@ class CategoryListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    controller.Catagorysearchcontroller.clear();
     return Scaffold(
       appBar: const CAppBar(
         title: 'Categories',

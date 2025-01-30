@@ -38,4 +38,10 @@ class ProductController extends GetxController {
       filteredProducts.assignAll(products.where((product) => product.title!.toLowerCase().contains(query.toLowerCase())));
     }
   }
+
+  @override
+  void onClose() {
+    productsearchcontroller.clear();
+    super.onClose();
+  }
 }
